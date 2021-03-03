@@ -49,7 +49,7 @@ $ java -jar example-api-1.0.0.jar
 
 
 ## Requisitos
-- Debe implementar su solución utilizando el Framework ReactJS en sus últimas versiones.
+- Debe implementar su solución utilizando el Framework ReactJS en su versión 16.13.1.
 - La solución debe ser enviada vía pull request a este repositorio.
 - La solución debe contener un README.md con las instrucciones para compilar e instalar.
 - En el detalle del commit debes indicar los siguientes datos:
@@ -61,8 +61,9 @@ $ java -jar example-api-1.0.0.jar
 ## ¿Qué se busca?
 - Manejo en programación funcional.
 - Uso de interceptors.
-- Conocimiento de códigos HTTP.
+- Uso de Fetch por sobre Axios para las solicitudes HTTP.
+- Conocimiento del protocolo HTTP.
 - Conocimientos de JWT.
-- Uso de Localstorage.
+- Uso de LocalStorage.
 - Uso de Hooks.
 - Uso de Redux.
