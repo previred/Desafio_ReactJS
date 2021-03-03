@@ -1,0 +1,520 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Previred API Example",
+        "version": "1.0.0",
+        "description": "A new API example.  Go nuts!",
+        "contact": {
+            "name": "Arquitectura Team",
+            "url": "https://previred.com",
+            "email": "arquitectura@previred.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:{port}/api",
+            "description": "Local API Example",
+            "variables": {
+                "port": {
+                    "default": "5000",
+                    "description": "Default port"
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/departments": {
+            "summary": "Path used to manage the list of departments.",
+            "description": "The REST endpoint/path used to list and create zero or more `Department` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Department"
+                                    }
+                                },
+                                "examples": {
+                                    "depts-example": {
+                                        "value": [
+                                            {
+                                                "idDept": 6,
+                                                "description": "some text"
+                                            },
+                                            {
+                                                "idDept": 84,
+                                                "description": "some text"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `Department` entities."
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "getdepartments",
+                "summary": "List All departments",
+                "description": "Gets a list of all `Department` entities."
+            }
+        },
+        "/employees": {
+            "summary": "Path used to manage the list of employees.",
+            "description": "The REST endpoint/path used to list and create zero or more `Employee` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Employee"
+                                    }
+                                },
+                                "examples": {
+                                    "employeesExample": {
+                                        "value": [
+                                            {
+                                                "idEmployee": 24,
+                                                "name": "some text",
+                                                "surname": "some text",
+                                                "email": "some text",
+                                                "rut": 86,
+                                                "dv": "some text",
+                                                "password": "some text",
+                                                "department": {
+                                                    "idDept": 56,
+                                                    "description": "some text"
+                                                }
+                                            },
+                                            {
+                                                "idEmployee": 1,
+                                                "name": "some text",
+                                                "surname": "some text",
+                                                "email": "some text",
+                                                "rut": 45,
+                                                "dv": "some text",
+                                                "password": "some text",
+                                                "department": {
+                                                    "idDept": 43,
+                                                    "description": "some text"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `Employee` entities."
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "getemployees",
+                "summary": "List All employees",
+                "description": "Gets a list of all `Employee` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `Employee` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Employee"
+                            },
+                            "examples": {
+                                "employee-example": {
+                                    "value": {
+                                        "name": "some text",
+                                        "surname": "some text",
+                                        "email": "some text",
+                                        "rut": 62,
+                                        "dv": "9",
+                                        "password": "some text",
+                                        "department": {
+                                            "idDept": 70,
+                                            "description": "some text"
+                                        },
+                                        "isAdm": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "Invalid json data."
+                    },
+                    "401": {
+                        "description": "You do not have grant access for this operation."
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "createEmployee",
+                "summary": "Create a Employee",
+                "description": "Creates a new instance of a `Employee`."
+            }
+        },
+        "/employees/{employeeId}": {
+            "summary": "Path used to manage a single Employee.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Employee`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "employeeId",
+                        "description": "A unique identifier for a `Employee`.",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Employee`."
+                    },
+                    "204": {
+                        "description": "No data available"
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "getEmployee",
+                "summary": "Get a Employee",
+                "description": "Gets the details of a single instance of a `Employee`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Employee` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Employee"
+                            },
+                            "examples": {
+                                "example-employee-edit": {
+                                    "value": {
+                                        "name": "some text",
+                                        "surname": "some text",
+                                        "email": "some text",
+                                        "rut": 63,
+                                        "dv": "some text",
+                                        "password": "some text",
+                                        "department": {
+                                            "idDept": 89,
+                                            "description": "some text"
+                                        },
+                                        "isAdm": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    },
+                    "204": {
+                        "description": "No data available"
+                    },
+                    "400": {
+                        "description": "Invalid json data"
+                    },
+                    "401": {
+                        "description": "You do not have grant access for this operation"
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "updateEmployee",
+                "summary": "Update a Employee",
+                "description": "Updates an existing `Employee`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    },
+                    "401": {
+                        "description": "You do not have grant access for this operation"
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    },
+                    "409": {
+                        "description": "You do not can delete your user."
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "operationId": "deleteEmployee",
+                "summary": "Delete a Employee",
+                "description": "Deletes an existing `Employee`."
+            },
+            "parameters": [
+                {
+                    "name": "employeeId",
+                    "description": "A unique identifier for a `Employee`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/token": {
+            "summary": "Path used to obtain a token.",
+            "description": "The REST endpoint/path used to obtain a token (JWT).",
+            "post": {
+                "requestBody": {
+                    "description": "User credentials",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            },
+                            "examples": {
+                                "loginresponseexample": {
+                                    "value": {
+                                        "rut": 50,
+                                        "password": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                },
+                                "examples": {
+                                    "loginresponse-example": {
+                                        "value": {
+                                            "token_type": "bearer",
+                                            "access_token": "123123awsdasdadfdasdasd"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an access token."
+                    },
+                    "400": {
+                        "description": "Invalid json data."
+                    },
+                    "403": {
+                        "description": "Credentials is not valid."
+                    }
+                },
+                "security": [
+                    {}
+                ],
+                "operationId": "getToken",
+                "summary": "Get a new Token.",
+                "description": "Get a new Token."
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "title": "LoginRequest",
+                "description": "This entity contains basic data for authentication.",
+                "type": "object",
+                "properties": {
+                    "rut": {
+                        "format": "int32",
+                        "description": "User rut.",
+                        "type": "integer"
+                    },
+                    "password": {
+                        "description": "User password.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "rut": 11111111,
+                    "password": "example"
+                }
+            },
+            "LoginResponse": {
+                "title": "LoginResponse",
+                "description": "This entity contains the login response data as access token based in jwt standard and its type.",
+                "type": "object",
+                "properties": {
+                    "token_type": {
+                        "description": "Token type: for example always is bearer.",
+                        "type": "string"
+                    },
+                    "access_token": {
+                        "description": "Token based in JWT standard.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "token_type": "bearer",
+                    "access_token": "qwertujfdsadfghjhgk"
+                }
+            },
+            "Department": {
+                "title": "Department",
+                "description": "This entity contains information about departments and areas in the company.",
+                "type": "object",
+                "properties": {
+                    "idDept": {
+                        "format": "int32",
+                        "description": "Department id.",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "description": "Department name.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "idDept": 1,
+                    "description": "IT"
+                }
+            },
+            "Employee": {
+                "title": "Employee",
+                "description": "This entity contains employee information.",
+                "required": [
+                    "department",
+                    "dv",
+                    "email",
+                    "name",
+                    "password",
+                    "rut",
+                    "surname",
+                    "isAdm"
+                ],
+                "type": "object",
+                "properties": {
+                    "idEmployee": {
+                        "format": "int64",
+                        "description": "Employee id.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Employee first name.",
+                        "type": "string"
+                    },
+                    "surname": {
+                        "description": "Employee surname.",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Employee email.",
+                        "type": "string"
+                    },
+                    "rut": {
+                        "format": "int32",
+                        "description": "Employee RUT.",
+                        "type": "integer"
+                    },
+                    "dv": {
+                        "description": "Employee RUT check digit.",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Employee password. Its size must be more than 10 characters.",
+                        "type": "string"
+                    },
+                    "department": {
+                        "$ref": "#/components/schemas/Department",
+                        "description": "Employee department."
+                    },
+                    "isAdm": {
+                        "description": "When this value is true, the user can edit, create and delete other users.",
+                        "type": "boolean"
+                    }
+                },
+                "example": {
+                    "idEmployee": 1,
+                    "name": "Daniel",
+                    "surname": "Lopez",
+                    "email": "daniel.lopez@example.com",
+                    "rut": 111111,
+                    "dv": "K",
+                    "password": "qwerty",
+                    "department": {},
+                    "isAdm": true
+                }
+            }
+        },
+        "securitySchemes": {
+            "JWT": {
+                "type": "apiKey",
+                "description": "Json Web Token",
+                "name": "Bearer",
+                "in": "header"
+            }
+        }
+    }
+}
