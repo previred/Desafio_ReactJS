@@ -47,6 +47,17 @@ $ java -jar example-api-1.0.0.jar
 5. Debe validar cada código de respuesta HTTP de la API para controlar posibles errores (revise la especificación de la API).
 6. Debe utilizar alguna biblioteca UI como Material UI.
 
+
+## Requisitos
+- Debe implementar su solución utilizando el Framework ReactJS en sus últimas versiones.
+- La solución debe ser enviada vía pull request a este repositorio.
+- La solución debe contener un README.md con las instrucciones para compilar e instalar.
+- En el detalle del commit debes indicar los siguientes datos:
+    - Nombre Completo.
+    - Correo Electrónico.
+    - Vía por la que te enteraste del desafío. Estas pueden ser: Empresa de outsourcing (indicar cuál), twitter, LinkedIn, etc.
+
+
 ## ¿Qué se busca?
 - Manejo en programación funcional.
 - Uso de interceptors.
@@ -55,4 +66,3 @@ $ java -jar example-api-1.0.0.jar
 - Uso de Localstorage.
 - Uso de Hooks.
 - Uso de Redux.
-
