@@ -31,6 +31,9 @@
 $ java -jar example-api-1.0.0.jar
 ```
 - Por defecto, para este ejemplo la API levantará en el puerto 5000, siendo su path http://localhost:5000
+- Los usuarios cargados por defecto son los siguientes:
+
+![N|Solid](docs/imgs/users.png)
 
 
 ## El desafío consiste en:
