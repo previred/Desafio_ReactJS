@@ -1,0 +1,32 @@
+.loginContainer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  .card {
+    padding: 15px;
+    min-width: 30vw;
+    [class~="MuiTextField-root"] {
+      display: flex;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    [class~="MuiDialogActions-root"] {
+      padding-left: 0;
+      button {
+        margin-right: auto;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  margin-bottom: 30px;
+  width: 100%;
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

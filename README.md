@@ -1,6 +1,30 @@
 [![N|Solid](docs/imgs/logo.png)](https://www.previred.com)
 
+
+## Main tech stack
+- Npm
+- React
+- Sass
+- Jest/ React-testing-library
+- StoryBook
+
+## Npm commands
+Execute any command like `npm COMMAND`.
+
+| Command | Description |
+| --- | --- |
+| `npm install` | install package|
+| `npm start` | Run project (React and spring boot - concurrently)|
+| `npm test` | Run test suites|
+| `npm run storybook` | Documentation (port 9009) |
+
 # Desafío para desarrolladores front end
+## Pasos
+
+- npm install (instalacion de paquetes)
+- npm start (corre concurrentemente el jar y el proyecto)
+- npm run test (corre las pruebas automaticas )
+-
 
 ## Condiciones generales
 - En este repositorio existe una API de ejemplo desarrollada en Java que contiene un CRUD básico de empleados y que implementa seguridad basada en JSON Web Tokens (https://jwt.io/).

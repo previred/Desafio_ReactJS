@@ -1,0 +1,106 @@
+{
+  "name": "previred-react-test",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"java -jar example-api-1.0.0.jar\" \"PORT=8000 react-app-rewired start\" ",
+    "check-types": "tsc",
+    "test": "react-app-rewired test",
+    "test:watch": "react-app-rewired test --coverage",
+    "lint": "eslint --ignore-path .gitignore . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|md|jsx|tsx|json)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+    "validate": "npm-run-all --parallel check-types check-format lint test",
+    "storybook": "start-storybook -p 9009"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "react-app",
+      "eslint-config-prettier",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint"
+    ],
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/js-cookie": "^2.2.6",
+    "@types/jwt-decode": "^3.1.0",
+    "axios": "^0.21.1",
+    "concurrently": "^5.1.0",
+    "formik": "^2.2.6",
+    "jest-fetch-mock": "^3.0.3",
+    "js-cookie": "^2.2.1",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.14.1",
+    "notistack": "^1.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.8.3",
+    "yup": "^0.32.8"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.stories.{ts,tsx}",
+      "!src/**/index.{ts,tsx}",
+      "!src/models/**/*",
+      "!src/utils/test/*",
+      "!src/react-app-env.d.ts",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^6.1.11",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.1.11",
+    "@testing-library/react": "^9.5.0",
+    "@types/jest": "^24.9.1",
+    "@types/lodash": "^4.14.159",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
+    "eslint-config-prettier": "^6.11.0",
+    "history": "^5.0.0",
+    "json-server": "^0.11.2",
+    "prettier": "^2.0.5",
+    "react-app-rewire-alias": "^0.1.9",
+    "react-app-rewired": "^2.1.8"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

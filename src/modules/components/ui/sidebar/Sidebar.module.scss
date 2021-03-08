@@ -1,0 +1,16 @@
+.container {
+  ul {
+    font-weight: 300;
+    li {
+      &:hover,
+      &:active{
+        background-color: #cfa2eb !important;
+      }
+      &[class~="Mui-selected"] {
+        background-color: #9863b9 !important;
+        color: #ffffff;
+        font-weight: 500;
+      }
+    }
+  }
+}

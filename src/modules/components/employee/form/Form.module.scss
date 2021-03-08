@@ -1,0 +1,13 @@
+.container {
+  border-bottom: 1px solid #cdcdcd;
+  margin-bottom: 20px !important;
+  padding-bottom: 20px;
+  [class~="MuiTextField-root"] {
+    width: 100%;
+  }
+}
+.buttonContainer {
+  button {
+    min-width: 150px;
+  }
+}

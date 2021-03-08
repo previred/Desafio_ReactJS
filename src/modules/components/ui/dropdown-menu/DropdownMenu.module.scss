@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  .mainButton {
+    flex: 1;
+    &:hover {
+      background-color: #bbb8b8;
+    }
+  }
+  .options {
+    flex: 1;
+    min-width: 150px;
+    [class~="MuiListItem-root"] {
+      &:hover {
+        background-color: #bbb8b8;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.container {
+  color: #cdcdcd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .infoContainer {
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    .title {
+      display: block;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    svg {
+      font-size: 8rem;
+    }
+    .description {
+      display: block;
+      font-size: 17px;
+      font-weight: normal;
+    }
+  }
+}
