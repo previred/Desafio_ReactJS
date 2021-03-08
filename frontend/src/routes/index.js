@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    BrowserRouter as Router,
+    Router,
     Switch,
     Route
 } from "react-router-dom";
 import Home from '../components/Home';
 import Login from '../components/Login/LoginForm';
+import AuthRoute from '../services/authWrapper';
+import history from '../services/history';
 
-function Routes() {
+function Routes(props) {
 
     return (
-        <Router>
+        <Router history={history}>
             <Switch>
-                <Route exact path="/" component={ Home } />
-                <Route path="/login" component={ Login } />
+                <AuthRoute exact path="/" component={Home}>
+                    <Home />
+                </AuthRoute>
+
+                <Route exact path="/login">
+                    <Login />
+                </Route>
+
             </Switch>
         </Router>
     )

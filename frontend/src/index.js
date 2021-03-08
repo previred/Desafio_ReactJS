@@ -4,10 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import Routes from './routes';
 
+import { Provider } from 'react-redux';
+import { store } from './redux/reducers';
+
+// localStorage.clear();
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <Routes />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
