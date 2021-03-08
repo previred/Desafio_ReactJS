@@ -14,7 +14,6 @@ function AuthRoute(props) {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         loggedIn: state.authentication.loggedIn,
     };
