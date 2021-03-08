@@ -29,6 +29,6 @@ function login(data) {
 }
 
 function logout() {
-    // userService.logout();
+    localStorage.clear();
     return { type: authConstants.LOGOUT };
 }
