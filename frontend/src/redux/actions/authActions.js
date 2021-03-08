@@ -19,6 +19,7 @@ function login(data) {
                 },
                 error => {
                     dispatch(failure(error));
+                    dispatch(alertActions.error());
                 }
             );
     };

@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Button, Container, Form, Row } from 'react-bootstrap';
+import Alert from '../Alerts';
 import { authActions } from '../../redux/actions/authActions';
 import { connect } from 'react-redux'
 import history from '../../services/history';
@@ -59,6 +60,7 @@ function LoginForm(props) {
                         Ingresar
                     </Button>
                 </Form>
+                <Alert />
             </Row>
         </Container>
     )

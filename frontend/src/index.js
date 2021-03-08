@@ -7,8 +7,6 @@ import Routes from './routes';
 import { Provider } from 'react-redux';
 import { store } from './redux/reducers';
 
-// localStorage.clear();
-
 ReactDOM.render(
   <Provider store={store}>
     <Routes />
