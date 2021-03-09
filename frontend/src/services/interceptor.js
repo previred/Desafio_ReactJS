@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const axiosApiInstance = axios.create();
-axiosApiInstance.baseURL = 'http://localhost:5000/api';
 
 const token = localStorage.getItem('token');
 
@@ -39,5 +38,3 @@ axiosApiInstance.interceptors.response.use(
 );
 
 export default axiosApiInstance;
-
-// const result = await axios.post(url, data)

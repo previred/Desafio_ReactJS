@@ -1,37 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import axiosApiInstance from '../../../../services/interceptor';
 import { parseJwt } from '../../../../utils/token';
 import { Table } from 'react-bootstrap';
 import TableHeader from './TableHeader';
 import TableFile from './TableFile';
+import { connect } from 'react-redux'
+import { employeeActions } from '../../../../redux/actions/employeeActions';
 
-function EmployeesTable () {
+function EmployeesTable (props) {
 
     const [data, setData] = useState();
-    const [objkeys, setObjkeys] = useState();
     const [isAdmin, setIsAdmin] = useState();
+
+    useEffect(async() => {
+        await props.getAllEmployees();
+    }, [])
+
+    useEffect(() => {
+        setData(props.employees);
+    }, [props.employees])
 
     useEffect(() => {
         const userData = parseJwt(localStorage.getItem('token'));
         setIsAdmin(userData.employee.isAdm);
     })
 
-    useEffect(async () => {
-        const results = await axiosApiInstance.get('http://localhost:5000/api/employees');
-        setData(results.data);
-        setObjkeys(Object.keys(results.data[0]));
-    }, [])
-
     return (
         <Table striped bordered hover variant="dark">
-            {objkeys && <TableHeader userIsAdmin={isAdmin} keys={objkeys} />}
-            <tbody>
-                {data && data.map(employee => {
-                    return <TableFile userIsAdmin={isAdmin} employee={employee}/>
-                })}
-            </tbody>
+            {data &&
+                <>
+                    <TableHeader userIsAdmin={isAdmin} keys={Object.keys(data[0])} />
+                    <tbody>
+                        {data.map(employee => {
+                            return <TableFile userIsAdmin={isAdmin} employee={employee}/>
+                        })}
+                    </tbody>
+                </>
+            }
         </Table>
     )
 }
 
-export default EmployeesTable;
+const mapStateToProps = (state) => {
+    return {
+        employees: state.employeesList.employees,
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getAllEmployees: () => dispatch(employeeActions.getAllEmployees()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeesTable);

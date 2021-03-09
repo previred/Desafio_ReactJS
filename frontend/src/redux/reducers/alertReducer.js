@@ -10,7 +10,7 @@ export function alert(state = {}, action) {
     case alertConstants.ERROR:
         return {
             type: 'danger',
-            message: "ha ocurrido un error durante la operacion"
+            message: action.message
         };
     default:
         return state

@@ -9,6 +9,6 @@ function success() {
     return { type: alertConstants.SUCCESS };
 }
 
-function error() {
-    return { type: alertConstants.ERROR };
+function error(message) {
+    return { type: alertConstants.ERROR, message };
 }
