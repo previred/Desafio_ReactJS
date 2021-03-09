@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { alertActions } from '../../redux/actions/alertsActions';
 
 function NotificationContainer (props) {
 
@@ -10,14 +11,14 @@ function NotificationContainer (props) {
         setShow(true);
 
         setTimeout(() => {
-            setShow(false);
+            props.clear();
         }, 3000)
     }, [props.type, props.message]);
 
     if (show) {
         return (
             <Alert transition="fade" variant={props.type}>
-                <Alert.Heading>{props.message}</Alert.Heading>
+                {props.message}
             </Alert>
         );
     }
@@ -32,4 +33,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, null)(NotificationContainer);
+function mapDispatchToProps(dispatch) {
+    return {
+        clear: () => dispatch(alertActions.clear()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationContainer);

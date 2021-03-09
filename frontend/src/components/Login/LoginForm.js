@@ -31,6 +31,7 @@ function LoginForm(props) {
     }
 
     return (
+        <>
         <Container className="d-flex justify-content-center">
             <Row>
                 <Form className="p-2">
@@ -60,9 +61,11 @@ function LoginForm(props) {
                         Ingresar
                     </Button>
                 </Form>
-                <Alert />
             </Row>
         </Container>
+
+        <Alert />
+        </>
     )
 }
 

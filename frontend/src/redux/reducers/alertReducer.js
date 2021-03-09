@@ -12,6 +12,8 @@ export function alert(state = {}, action) {
             type: 'danger',
             message: action.message
         };
+    case alertConstants.CLEAR:
+        return {};
     default:
         return state
     }
