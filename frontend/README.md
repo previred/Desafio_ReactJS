@@ -1,3 +1,24 @@
+# LEVANTAR FRONTEND DEL PROYECTO 
+
+## NPM
+
+Para levantar el proyecto es necesario tener instalado en el equipo NodeJS y npm.
+
+En la terminal ir al directorio raiz.
+Se debe encontrar el directorio `frontend` dentro de la raiz del proyecto. Entrar al directorio y ejecutar el comando
+
+1. `npm install`
+2. `npm start`
+
+Se levantara el frontend en la URL: `http://localhost:3000`
+
+Se abrira la ruta `/login` donde al ingresar alguna de las credenciales de los usuarios registrados se podra acceder a las vistas interiores (lista de empleados)
+
+NOTA: en caso de ingresar credenciales correctas pero no visualizar empleados, vastara con recargar (ctrl + r o F5)
+
+Se pueden realizar acciones de edicion y eliminar empleados en caso de ser usuario admin y solo de visualizacion para el usuario comun.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
