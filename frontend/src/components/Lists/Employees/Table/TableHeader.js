@@ -5,9 +5,6 @@ function TableHeader (props) {
         <thead>
             <tr>
                 {props.keys.map(key => {
-                    if (key === 'isAdm')
-                        return false
-
                     return <td>{key}</td>
                 })}
                 {props.userIsAdmin &&

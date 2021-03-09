@@ -8,7 +8,7 @@ export function employeesList(state = {}, action) {
         };
     case employeeConstants.GETALL_SUCCESS:
         return {
-            employees: action.employees
+            employees: action.data
         };
     case employeeConstants.GETALL_FAILURE:
         return { 
