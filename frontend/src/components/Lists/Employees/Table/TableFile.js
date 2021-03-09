@@ -1,28 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import { employeeActions } from '../../../../redux/actions/employeeActions';
+import { validate, clean, format, getCheckDigit } from '../../../../utils/rutValidator';
 
 function TableFile (props) {
 
     const {employee, userIsAdmin} = props;
     const [data, setData] = useState(employee);
     const [disabled, setDisabled] = useState(true);
+    const [rutVal, setRutVal] = useState();
 
     const handleInputChange = (event) => {
+
+        if([event.target.name] == 'rut') {
+            rutValidations([event.target.name]);
+        }
+
+        if([event.target.name] == 'dv') {
+            dvValidations([event.target.name]);
+        }
+
         setData({
             ...data,
             [event.target.name] : event.target.value
         })
     }
 
+    const rutValidations = (rut) => {
+        console.log('RUT EDIT')
+        let dv = data.dv;
+        rut = clean(rut.concat(dv));
+
+        if (!validate(rut)) {
+            setRutVal('El rut no es valido!');
+        }
+
+        setRutVal(null);
+    }
+
+    const dvValidations = (dv) => {
+        const rut = data.rut;
+        const validDv = getCheckDigit(rut);
+
+        if (validDv !== dv) {
+            setRutVal('El digito verificaro no es valido!');
+        }
+
+        setRutVal(null);
+    }
+
     const cancelUpdate = () => {
         setData(employee);
         setDisabled(true);
+        setRutVal(null);
     }
 
     const handleUpdate = () => {
-        props.editEmployee(data);
-        setDisabled(true);
+        if(!rutVal){
+            props.editEmployee(data);
+            setDisabled(true);
+        }
+
     }
 
     const handleDelete = () => {
@@ -47,6 +85,7 @@ function TableFile (props) {
                             onChange={handleInputChange} 
                             value={data[key]}
                         />
+                        {key == 'rut' &&  <p>{rutVal}</p>}
                     </td>
                 )
             })}
