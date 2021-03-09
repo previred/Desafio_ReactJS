@@ -15,9 +15,10 @@ function login(data) {
                 response => { 
                     dispatch(success(response.data));
                     localStorage.setItem('token', response.data.accessToken);
+                    dispatch(alertActions.success());
                     setTimeout(() => {
                         history.replace("/");
-                    }, 3000)  
+                    }, 2000)  
                 },
                 error => {
                     dispatch(failure(error));
