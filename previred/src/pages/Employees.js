@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "antd";
 import { getEmployees, deleteEmployees } from "../services/employees";
 import MenuLayout from "../components/MenuLayout";
+import { navigate } from "@reach/router";
 
 const Employees = () => {
   const columns = [
@@ -64,8 +65,15 @@ const Employees = () => {
     fecthData();
   }, []);
 
+  const newEmployee = () => {
+    navigate("/employees/create");
+  };
+
   return (
     <MenuLayout>
+      <Button type="link" onClick={newEmployee}>
+        New employee
+      </Button>
       <Table columns={columns} dataSource={employees} />
     </MenuLayout>
   );

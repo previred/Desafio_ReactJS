@@ -9,3 +9,7 @@ export async function getEmployees() {
 export async function deleteEmployees(id) {
   return previredAxios.delete(`${API_URL}/employees/${id}`);
 }
+
+export async function saveEmployee(data) {
+  return previredAxios.post(`${API_URL}/employees`, data);
+}
