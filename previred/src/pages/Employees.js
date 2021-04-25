@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "antd";
-import { getEmployees } from "../services/employees";
+import { Table, Button } from "antd";
+import { getEmployees, deleteEmployees } from "../services/employees";
 import MenuLayout from "../components/MenuLayout";
 
 const Employees = () => {
@@ -32,7 +32,26 @@ const Employees = () => {
       key: "deparment",
       render: (text, record) => record.department.description,
     },
+    {
+      title: "Actions",
+      render: (text, record) => (
+        <Button
+          type="link"
+          onClick={() => removeEmployee(record.idEmployee)}
+          rowKey="employee"
+        >
+          Delete
+        </Button>
+      ),
+    },
   ];
+
+  const removeEmployee = async (id) => {
+    const { data, status } = await deleteEmployees(id);
+    if (status === 204) {
+      window.location.reload();
+    }
+  };
 
   const [employees, setEmployees] = useState([]);
 
