@@ -1,4 +1,4 @@
-import { SET_AUTH_INFO } from "../../constants/actionTypes";
+import { SET_AUTH_INFO, REMOVE_AUTH_INFO } from "../../constants/actionTypes";
 
 const initialState = {
   idEmployee: null,
@@ -23,6 +23,11 @@ const actionsMap = {
       dv: action.payload.dv,
       department: action.payload.department,
       isAdm: action.payload.isAdm,
+    };
+  },
+  [REMOVE_AUTH_INFO]: (state) => {
+    return {
+      ...initialState,
     };
   },
 };

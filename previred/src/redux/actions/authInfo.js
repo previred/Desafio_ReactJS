@@ -1,4 +1,4 @@
-import { SET_AUTH_INFO } from "../constants/actionTypes";
+import { SET_AUTH_INFO, REMOVE_AUTH_INFO } from "../constants/actionTypes";
 
 function setAuthInfo(data) {
   return {
@@ -7,4 +7,10 @@ function setAuthInfo(data) {
   };
 }
 
-export { setAuthInfo };
+function removeAuthInfo() {
+  return {
+    type: REMOVE_AUTH_INFO,
+  };
+}
+
+export { setAuthInfo, removeAuthInfo };

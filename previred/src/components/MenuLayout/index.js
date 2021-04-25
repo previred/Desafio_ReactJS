@@ -1,10 +1,23 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, navigate } from "@reach/router";
+import { removeAuthInfo } from "../../redux/actions/authInfo";
 import { Layout, Menu } from "antd";
-import { UserOutlined, BookOutlined } from "@ant-design/icons";
+import { UserOutlined, SettingOutlined } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
+const { SubMenu } = Menu;
 
 const MenuLayout = ({ children }) => {
+  const { name, surname } = useSelector((state) => state.AuthReducer);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    localStorage.setItem("token", "");
+    dispatch(removeAuthInfo());
+    navigate("/login");
+  };
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={false}>
@@ -16,18 +29,29 @@ const MenuLayout = ({ children }) => {
           style={{ marginTop: "60px" }}
         >
           <Menu.Item key="1" icon={<UserOutlined />}>
-            Employees
-          </Menu.Item>
-          <Menu.Item key="2" icon={<BookOutlined />}>
-            Deparments
+            <Link to="/employees">Employees</Link>
           </Menu.Item>
         </Menu>
       </Sider>
       <Layout className="site-layout">
-        <Header
-          className="site-layout-background"
-          style={{ padding: 0 }}
-        ></Header>
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["1"]}
+            style={{ float: "right", marginRight: "22px" }}
+          >
+            <SubMenu
+              key="SubMenu"
+              icon={<SettingOutlined />}
+              title={`${name} ${surname}`}
+            >
+              <Menu.Item key="setting:1" onClick={logout}>
+                Logout
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </Header>
         <Content
           className="site-layout-background"
           style={{
