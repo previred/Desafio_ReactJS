@@ -102,3 +102,27 @@ dist
 
 # TernJS port file
 .tern-port
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/previred/node_modules
+/previred/.pnp
+/previred/.pnp.js
+
+# testing
+/previred/coverage
+
+# production
+/previred/build
+
+# misc
+/previred/.DS_Store
+/previred/.env.local
+/previred/.env.development.local
+/previred/.env.test.local
+/previred/.env.production.local
+
+/previred/npm-debug.log*
+/previred/yarn-debug.log*
+/previred/yarn-error.log*
