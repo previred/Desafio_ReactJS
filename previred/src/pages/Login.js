@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { navigate } from "@reach/router";
 import jwt_decode from "jwt-decode";
@@ -24,8 +24,10 @@ const Login = () => {
   };
 
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState(false)
 
   const onFinish = async (values) => {
+    setErrorMessage(false)
     const { data, status } = await login(values);
 
     if (status === 200) {
@@ -34,6 +36,8 @@ const Login = () => {
       const decoded = jwt_decode(data.accessToken);
       dispatch(setAuthInfo(decoded.employee));
       navigate("/employees");
+    }else{
+      setErrorMessage(true)
     }
   };
 
@@ -67,6 +71,8 @@ const Login = () => {
             <Input.Password />
           </Form.Item>
 
+          {errorMessage && <h4 align="middle">Credenciales invalidas</h4>}
+          
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               Submit

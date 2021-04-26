@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import { saveEmployee } from "../services/employees";
 import { getDepartments } from "../services/departments";
 import { Form, Input, Button, Row, Col, Select } from "antd";
@@ -25,6 +25,12 @@ const CreateEmployee = () => {
   };
 
   const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    if(localStorage.getItem("token") === "" || localStorage.getItem("token") === null ){
+      navigate("/login")
+    }
+  }, []);
 
   useEffect(() => {
     const fecthData = async () => {
@@ -190,6 +196,7 @@ const CreateEmployee = () => {
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
+              <Link to={"/employees"} style={{marginLeft: "20px"}}> Back </Link>
             </Form.Item>
           </Col>
         </Row>

@@ -61,6 +61,12 @@ const Employees = () => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
+    if(localStorage.getItem("token") === "" || localStorage.getItem("token") === null ){
+      navigate("/login")
+    }
+  }, []);
+
+  useEffect(() => {
     const fecthData = async () => {
       const { data, status } = await getEmployees();
       setEmployees(data);
