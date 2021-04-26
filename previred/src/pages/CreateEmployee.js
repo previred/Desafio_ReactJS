@@ -29,7 +29,9 @@ const CreateEmployee = () => {
   useEffect(() => {
     const fecthData = async () => {
       const { data, status } = await getDepartments();
-      setDepartments(data);
+      if (status === 200) {
+        setDepartments(data);
+      }
     };
 
     fecthData();
@@ -53,6 +55,24 @@ const CreateEmployee = () => {
     }
   };
 
+  const Fn = {
+    validaRut: function (rutCompleto) {
+      if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto)) return false;
+      const tmp = rutCompleto.split("-");
+      let digv = tmp[1];
+      const rut = tmp[0];
+      if (digv == "K") digv = "k";
+      return Fn.dv(rut) == digv;
+    },
+    dv: function (T) {
+      let M = 0,
+        S = 1;
+      for (; T; T = Math.floor(T / 10))
+        S = (S + (T % 10) * (9 - (M++ % 6))) % 11;
+      return S ? S - 1 : "k";
+    },
+  };
+
   return (
     <MenuLayout>
       <Form {...layout} name="basic" onFinish={onFinish}>
@@ -64,7 +84,7 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Ingrese nombre",
+                  message: "Input your name",
                 },
               ]}
             >
@@ -77,7 +97,7 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Ingresa apellido",
+                  message: "Input your surname",
                 },
               ]}
             >
@@ -90,7 +110,9 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Ingrese rut",
+                  validator: (rule, value, cb) => {
+                    Fn.validaRut(value) ? cb() : cb("Input valid RUT");
+                  },
                 },
               ]}
             >
@@ -103,7 +125,13 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Ingrese email",
+                  validator: (rule, value, cb) => {
+                    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+                      value
+                    )
+                      ? cb()
+                      : cb("Input valid email");
+                  },
                 },
               ]}
             >
@@ -117,7 +145,7 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Selecciona departamento",
+                  message: "Select department",
                 },
               ]}
             >
@@ -130,16 +158,16 @@ const CreateEmployee = () => {
 
             <Form.Item
               label="Is Admin"
-              name="isAdmin"
+              name="isAdm"
               rules={[
                 {
                   required: true,
-                  message: "Es Administrador",
+                  message: "Is Admin",
                 },
               ]}
             >
               <Select style={{ width: 120 }}>
-                <Option value={true}>Si</Option>
+                <Option value={true}>Yes</Option>
                 <Option value={false}>No</Option>
               </Select>
             </Form.Item>
@@ -150,7 +178,7 @@ const CreateEmployee = () => {
               rules={[
                 {
                   required: true,
-                  message: "Ingrese contraseña",
+                  message: "Input your password",
                 },
               ]}
             >
