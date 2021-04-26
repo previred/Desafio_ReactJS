@@ -5,6 +5,7 @@ import { Router } from "@reach/router";
 import Login from "./pages/Login";
 import Employees from "./pages/Employees";
 import CreateEmployee from "./pages/CreateEmployee";
+import EditEmployee from "./pages/EditEmployee";
 import "./App.css";
 
 import configureStore from "./redux/store";
@@ -19,6 +20,7 @@ function App() {
           <Login path="/login" />
           <Employees path="/employees" />
           <CreateEmployee path="/employees/create" />
+          <EditEmployee path="/employees/edit/:employeeId" />
         </Router>
       </PersistGate>
     </Provider>

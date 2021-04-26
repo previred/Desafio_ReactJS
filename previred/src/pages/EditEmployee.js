@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
-import { saveEmployee } from "../services/employees";
+import { getEmployee, updateEmployee } from "../services/employees";
 import { getDepartments } from "../services/departments";
 import { Form, Input, Button, Row, Col, Select } from "antd";
 import MenuLayout from "../components/MenuLayout";
 
 const { Option } = Select;
 
-const CreateEmployee = () => {
+const EditEmployee = ({employeeId}) => {
   const layout = {
     labelCol: {
       span: 8,
@@ -24,17 +24,37 @@ const CreateEmployee = () => {
     },
   };
 
+  const [form] = Form.useForm();
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    const fecthData = async () => {
+    const fecthDepartments = async () => {
       const { data, status } = await getDepartments();
       if (status === 200) {
         setDepartments(data);
       }
     };
 
-    fecthData();
+    const fecthEmployee = async () => {
+      const { data, status } = await getEmployee(employeeId);
+      if (status === 200) {
+        const response = {
+          name: data.name,
+          surname: data.surname,
+          email: data.email,
+          isAdm: data.isAdm,
+          rut: `${data.rut}-${data.dv}`,
+          department: data.department.idDept
+        }
+
+        console.log(response)
+
+        form.setFieldsValue(response);
+      }
+    };
+
+    fecthDepartments()
+    fecthEmployee()
   }, []);
 
   const onFinish = async (values) => {
@@ -48,9 +68,9 @@ const CreateEmployee = () => {
     values["rut"] = parseInt(rut[0]);
     values["dv"] = parseInt(rut[1]);
 
-    const { data, status } = await saveEmployee(values);
+    const { data, status } = await updateEmployee(employeeId, values);
 
-    if (status === 201) {
+    if (status === 202) {
       navigate("/employees");
     }
   };
@@ -75,7 +95,7 @@ const CreateEmployee = () => {
 
   return (
     <MenuLayout>
-      <Form {...layout} name="basic" onFinish={onFinish}>
+      <Form {...layout} name="edit" form={form} onFinish={onFinish}>
         <Row>
           <Col span={12}>
             <Form.Item
@@ -198,4 +218,4 @@ const CreateEmployee = () => {
   );
 };
 
-export default CreateEmployee;
+export default EditEmployee;

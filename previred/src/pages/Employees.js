@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "@reach/router";
 import { Table, Button } from "antd";
 import { getEmployees, deleteEmployees } from "../services/employees";
 import MenuLayout from "../components/MenuLayout";
@@ -36,13 +37,16 @@ const Employees = () => {
     {
       title: "Actions",
       render: (text, record) => (
-        <Button
-          type="link"
-          onClick={() => removeEmployee(record.idEmployee)}
-          rowKey="employee"
-        >
-          Delete
-        </Button>
+        <div>
+          <Link to={`/employees/edit/${record.idEmployee}`} >Edit</Link>
+          <Button
+            type="link"
+            onClick={() => removeEmployee(record.idEmployee)}
+            rowKey="employee"
+          >
+            Delete
+          </Button>
+        </div>
       ),
     },
   ];
